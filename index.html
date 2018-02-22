@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #c1{
+        background-color: #1FC4E0;
+        display: block;
+        margin: 50px auto;
+    }
+</style>
+<body>
+<canvas id="c1" width="800px" height="500px">
+
+</canvas>
+</body>
+<script>
+    var oC=document.getElementById("c1");
+    var oCc=oC.getContext('2d');
+    function draw() {
+        var oDate=new Date();
+        var hours=oDate.getHours();
+        var minutes=oDate.getMinutes();
+        var seconds=oDate.getSeconds();
+
+         var oS=6*seconds-90;
+         var oM=6*minutes+oS/60-90;
+         if (hours>12)
+            var oH=(hours-12)*30+30*minutes/60-90;
+         else
+             oH=hours*30+30*minutes/60-90;
+        var x=400;
+        var y=250;
+        oCc.clearRect(0,0,oC.width,oC.height);
+        oCc.beginPath();
+        for(var i=0;i<60;i++)
+        {
+            oCc.moveTo(x,y);
+            oCc.arc(x,y,200,(i*6)*Math.PI/180,(i+1)*6*Math.PI/180,false);
+        }
+        oCc.stroke();
+        oCc.fillStyle= '#1FC4E0';
+        oCc.beginPath();
+        oCc.arc(x,y,190,0,360*Math.PI/180,false);
+        oCc.closePath();
+        oCc.closePath();
+        oCc.fill();
+
+        oCc.beginPath();
+        oCc.lineWidth=4;
+        for(var i=0;i<12;i++)
+        {
+            oCc.moveTo(x,y);
+            oCc.arc(x,y,200,(i*30)*Math.PI/180,(i+1)*30*Math.PI/180,false);
+        }
+        oCc.stroke();
+        oCc.fillStyle= '#1FC4E0';
+        oCc.beginPath();
+        oCc.arc(x,y,175,0,360*Math.PI/180,false);
+        oCc.closePath();
+        oCc.closePath();
+        oCc.fill();
+
+        oCc.beginPath();
+        oCc.moveTo(x,y);
+        oCc.arc(x,y,110,oH*Math.PI/180,oH*Math.PI/180,false);
+        oCc.closePath();
+        oCc.stroke();
+
+        oCc.lineWidth=2.5;
+        oCc.beginPath();
+        oCc.moveTo(x,y);
+        oCc.arc(x,y,130,oM*Math.PI/180,oM*Math.PI/180,false);
+        oCc.closePath();
+        oCc.stroke();
+
+
+        oCc.lineWidth=1;
+        oCc.beginPath();
+        oCc.moveTo(x,y);
+        oCc.arc(x,y,170,oS*Math.PI/180,oS*Math.PI/180,false);
+        oCc.closePath();
+        oCc.stroke();
+    }
+   setInterval(draw,100);
+    draw();
+</script>
+</html>
